@@ -201,10 +201,12 @@ def create_segmentation(object_name_list=['001']):
         smplx_mesh.active_material = bpy.data.materials['Material']
         smplx_mesh.active_material.pass_index = 2
         bpy.ops.object.select_all(action='DESELECT')
+    """
     bpy.data.objects[scene_name].select_set(True)
     scene_mesh = bpy.data.objects[scene_name]
     scene_mesh.active_material = bpy.data.materials['Material']
     scene_mesh.active_material.pass_index = 1
+    """
     bpy.ops.object.select_all(action='DESELECT')
  
 def camera_rot_to_XYZEuler(R):
@@ -272,6 +274,7 @@ def process_single_frame(action_name, scene_mesh_dir_list, frame_body_mesh_list,
         cam_ob.rotation_euler[0] = single_camera_euler[0]
         cam_ob.rotation_euler[1] = single_camera_euler[1]
         cam_ob.rotation_euler[2] = single_camera_euler[2]
+        cam_ob.data.lens = 20
         render_settings(action_name=action_name, view_index=index)
         bpy.ops.render.render(write_still=True)
     clear_mesh()
